@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="flex-wrap: nowrap; flex-direction: row; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 20px; background-image: none; -unity-slice-left: 5; -unity-slice-top: 5; -unity-slice-right: 5; -unity-slice-bottom: 5; margin-left: 0; margin-right: 0;">
+        <ui:Label text="1" display-tooltip-when-elided="false" name="Position" enable-rich-text="false" style="width: 10%; font-size: 20px;" />
+        <ui:Label text="PlayerName" display-tooltip-when-elided="false" name="PlayerName" enable-rich-text="false" style="width: 70%; font-size: 20px;" />
+        <ui:Label text="100" display-tooltip-when-elided="false" name="Score" enable-rich-text="false" style="width: 20%; flex-direction: column; -unity-text-align: upper-right; font-size: 20px; -unity-font-style: bold; color: rgb(255, 189, 0);" />
+    </ui:VisualElement>
+</ui:UXML>

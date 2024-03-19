@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
+  m_Name: RemoteConfigDataStoreAsset
+  m_EditorClassIdentifier: 
+  _rsKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"a4dcb7f0-b0bd-4be6-8511-9e7e243c3f59\"\n   
+    },\n    \"rs\": {\n      \"key\": \"jumpPower\",\n      \"type\": \"float\",\n     
+    \"value\": 20.0\n    }\n  },\n  {\n    \"metadata\": {\n      \"entityId\": \"a1fdb856-fb45-4ca1-bc48-26bdd0a9126b\"\n   
+    },\n    \"rs\": {\n      \"key\": \"gravity\",\n      \"type\": \"float\",\n     
+    \"value\": 20.0\n    }\n  },\n  {\n    \"metadata\": {\n      \"entityId\": \"e3332081-44ef-4a74-9618-533a56d738d1\"\n   
+    },\n    \"rs\": {\n      \"key\": \"maxFallSpeed\",\n      \"type\": \"float\",\n     
+    \"value\": 20.0\n    }\n  },\n  {\n    \"metadata\": {\n      \"entityId\": \"01528bb2-ecd9-4d2b-84fc-e1242477998a\"\n   
+    },\n    \"rs\": {\n      \"key\": \"moveSpeed\",\n      \"type\": \"float\",\n     
+    \"value\": 20.0\n    }\n  },\n  {\n    \"metadata\": {\n      \"entityId\": \"57c2e775-0906-44ec-b73c-f1e0e38aad79\"\n   
+    },\n    \"rs\": {\n      \"key\": \"forwardSpeed\",\n      \"type\": \"float\",\n     
+    \"value\": 40.0\n    }\n  }\n]"
+  _rsLastCachedKeyList: "[\n  {\n    \"metadata\": {\n      \"entityId\": \"a4dcb7f0-b0bd-4be6-8511-9e7e243c3f59\"\n   
+    },\n    \"rs\": {\n      \"key\": \"jumpPower\",\n      \"type\": \"float\",\n     
+    \"value\": 20.0\n    }\n  },\n  {\n    \"metadata\": {\n      \"entityId\": \"a1fdb856-fb45-4ca1-bc48-26bdd0a9126b\"\n   
+    },\n    \"rs\": {\n      \"key\": \"gravity\",\n      \"type\": \"float\",\n     
+    \"value\": 20.0\n    }\n  },\n  {\n    \"metadata\": {\n      \"entityId\": \"e3332081-44ef-4a74-9618-533a56d738d1\"\n   
+    },\n    \"rs\": {\n      \"key\": \"maxFallSpeed\",\n      \"type\": \"float\",\n     
+    \"value\": 20.0\n    }\n  },\n  {\n    \"metadata\": {\n      \"entityId\": \"01528bb2-ecd9-4d2b-84fc-e1242477998a\"\n   
+    },\n    \"rs\": {\n      \"key\": \"moveSpeed\",\n      \"type\": \"float\",\n     
+    \"value\": 20.0\n    }\n  },\n  {\n    \"metadata\": {\n      \"entityId\": \"57c2e775-0906-44ec-b73c-f1e0e38aad79\"\n   
+    },\n    \"rs\": {\n      \"key\": \"forwardSpeed\",\n      \"type\": \"float\",\n     
+    \"value\": 40.0\n    }\n  }\n]"
+  _environments: "[\n  {\n    \"projectId\": \"fde9d07d-c4f3-46c5-a3ec-0ff83295bf8d\",\n   
+    \"name\": \"production\",\n    \"id\": \"a0918166-e6ce-42c3-bb2d-3acc32f501c3\",\n   
+    \"isDefault\": true,\n    \"createdAt\": \"2024-03-07T09:42:33Z\",\n    \"updatedAt\":
+    \"2024-03-07T09:42:33Z\"\n  }\n]"
