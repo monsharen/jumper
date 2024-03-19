@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         var ui = new Ui(unityGamingServices, stateMachine, uiDocument, leaderboardEntry);
         stateMachine.Register(Dead, new DeadState(player, ui, effectManager, unityGamingServices, stateMachine));
         stateMachine.Register(Falling, new FallingState( player, unityGamingServices, effectManager, stateMachine));
-        stateMachine.Register(Jumping, new JumpingState(player, effectManager, stateMachine, unityGamingServices));
+        stateMachine.Register(Jumping, new JumpingState(player, effectManager, stateMachine));
         stateMachine.Register(Grounded, new GroundedState(player, effectManager, stateMachine));
         stateMachine.Register(Leaderboard, new LeaderboardState(ui, unityGamingServices));
         stateMachine.Register(NewGame, new NewGameState(player, stateMachine));

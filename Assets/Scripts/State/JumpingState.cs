@@ -7,20 +7,15 @@ namespace State
     public class JumpingState : IState
     {
         private readonly StateMachine stateMachine;
-        private readonly UnityGamingServices unityGamingServices;
         private readonly Player player;
-        
         private readonly EffectManager effectManager;
         
-        private const float VelocityThreshold = 0.1f;
 
-        public JumpingState(Player player, EffectManager effectManager, StateMachine stateMachine,
-            UnityGamingServices unityGamingServices)
+        public JumpingState(Player player, EffectManager effectManager, StateMachine stateMachine)
         {
             this.player = player;
             this.effectManager = effectManager;
             this.stateMachine = stateMachine;
-            this.unityGamingServices = unityGamingServices;
         }
 
         public void Start()
