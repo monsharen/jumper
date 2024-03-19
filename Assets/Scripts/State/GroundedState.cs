@@ -1,3 +1,4 @@
+using Controls;
 using UnityEngine;
 
 namespace State
@@ -8,8 +9,7 @@ namespace State
         private readonly Player player;
         private readonly StateMachine stateMachine;
         private readonly EffectManager effectManager;
-
-        private Player.PhysicsState physicsState;
+        
         public GroundedState(Player player, EffectManager effectManager, StateMachine stateMachine)
         {
             this.player = player;
@@ -19,7 +19,7 @@ namespace State
 
         public void Start()
         {
-            physicsState = player.CreatePhysicsState();
+            player.ResetJumpState();
         }
 
         public void Update()
@@ -32,7 +32,7 @@ namespace State
 
         public void FixedUpdate()
         {
-            physicsState.MoveForward();
+            player.Jump.MoveForward();
         }
 
         public void End()

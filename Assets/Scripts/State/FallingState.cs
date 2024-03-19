@@ -1,3 +1,4 @@
+using Controls;
 using Ugs;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace State
         private readonly EffectManager effectManager;
         private readonly Player player;
 
-        private Player.PhysicsState physicsState;
+        private Jump jump;
 
         public FallingState(Player player, UnityGamingServices unityGamingServices, EffectManager effectManager, StateMachine stateMachine)
         {
@@ -23,7 +24,7 @@ namespace State
 
         public void Start()
         {
-            physicsState = player.GetCurrentPhysicsState();
+            jump = player.Jump;
         }
 
         public void Update()
@@ -33,8 +34,8 @@ namespace State
 
         public void FixedUpdate()
         {
-            physicsState.MoveForward();
-            physicsState.FallUpdate();
+            jump.MoveForward();
+            jump.FallUpdate();
             
             if (player.GetRigidbody().transform.position.y < -1)
             {
