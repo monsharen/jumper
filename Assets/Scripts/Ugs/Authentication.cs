@@ -1,10 +1,16 @@
 using System;
+using System.Threading.Tasks;
 using Unity.Services.Authentication;
 
 namespace Ugs
 {
     public class Authentication
     {
+        
+        public async Task SignInAnonymously()
+        {
+            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        }
         
         public string GetPlayerName()
         {

@@ -9,6 +9,7 @@ namespace State
         private readonly StateMachine stateMachine;
         private readonly EffectManager effectManager;
 
+        private Player.PhysicsState physicsState;
         public GroundedState(Player player, EffectManager effectManager, StateMachine stateMachine)
         {
             this.player = player;
@@ -18,7 +19,7 @@ namespace State
 
         public void Start()
         {
-            
+            physicsState = player.CreatePhysicsState();
         }
 
         public void Update()
@@ -31,7 +32,7 @@ namespace State
 
         public void FixedUpdate()
         {
-            player.MoveForward();
+            physicsState.MoveForward();
         }
 
         public void End()

@@ -8,11 +8,10 @@ namespace State
         private readonly StateMachine stateMachine;
         private readonly UnityGamingServices unityGamingServices;
         private readonly Player player;
-        
+        private Player.PhysicsState physicsState;
         
         private readonly EffectManager effectManager;
-        private float jumpPower = 0f;
-        private const float Deceleration = 40f;
+        
         private const float VelocityThreshold = 0.1f;
 
         public JumpingState(Player player, EffectManager effectManager, StateMachine stateMachine,
@@ -26,7 +25,7 @@ namespace State
 
         public void Start()
         {
-            jumpPower = unityGamingServices.GetRemoteConfig().JumpPower;
+            physicsState = player.GetCurrentPhysicsState();
         }
 
         public void Update()
@@ -39,15 +38,11 @@ namespace State
 
         public void FixedUpdate()
         {
-            player.MoveForward();
-            
-            var decreasedSpeed = Mathf.Max(0, jumpPower - (Deceleration * Time.fixedDeltaTime));
-            player.GetRigidbody().velocity = new Vector3(0, decreasedSpeed, 0);
-            jumpPower = decreasedSpeed;
-            
-            if (player.GetRigidbody().velocity.y <= VelocityThreshold)
+            physicsState.MoveForward();
+
+            if (!physicsState.JumpUpdate())
             {
-                stateMachine.ChangeState(State.Falling);
+                stateMachine.ChangeState(State.Falling);                
             }
         }
 

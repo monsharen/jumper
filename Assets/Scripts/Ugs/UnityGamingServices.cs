@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Unity.Services.Authentication;
 using Unity.Services.Core;
 
 namespace Ugs
@@ -22,8 +21,7 @@ namespace Ugs
         public async Task Init()
         {
             await UnityServices.InitializeAsync();
-            await AuthenticationService.Instance.SignInAnonymouslyAsync();
-            analytics.OptIn();
+            await authentication.SignInAnonymously();
             await remoteConfig.RefreshConfig();
         }
         
