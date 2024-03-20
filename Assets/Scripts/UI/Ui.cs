@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Controls;
 using State;
 using Ugs;
 using UnityEngine;
@@ -12,16 +13,22 @@ namespace UI
     {
         private static readonly string PlayerNameTextFieldName = "PlayerName";
         private UnityGamingServices unityGamingServices;
+        private Player player;
         private StateMachine stateMachine;
         private UIDocument uiDocument;
+        private UIDocument hudDocument;
         private VisualTreeAsset leaderboardEntry;
+        private ProgressBar progressBar;
 
-        public Ui(UnityGamingServices unityGamingServices, StateMachine stateMachine, UIDocument uiDocument, VisualTreeAsset leaderboardEntry)
+        public Ui(UnityGamingServices unityGamingServices, Player player, StateMachine stateMachine, UIDocument uiDocument, UIDocument hudDocument, VisualTreeAsset leaderboardEntry)
         {
             this.unityGamingServices = unityGamingServices;
+            this.player = player;
             this.stateMachine = stateMachine;
             this.uiDocument = uiDocument;
+            this.hudDocument = hudDocument;
             this.leaderboardEntry = leaderboardEntry;
+            progressBar = hudDocument.rootVisualElement.Q<ProgressBar>("FuelProgressBar");
         }
 
         public void ShowLeaderboard(List<LeaderboardScore> scores)
@@ -67,14 +74,22 @@ namespace UI
             uiDocument.enabled = false;
         }
 
-        private Label CreateLabel()
+        public void UpdateFuel()
         {
-            var myLabel = new Label("Hello, UIToolkit!");
+            if (Math.Abs(progressBar.value - player.Fuel) > 0.5f)
+            {
+                progressBar.value = player.Fuel;                
+            }
+        }
 
-            // Optionally, set some styling properties
-            myLabel.style.fontSize = 14;
-            myLabel.style.color = Color.white;
-            return myLabel;
+        public void ShowHud()
+        {
+            hudDocument.enabled = true;
+        }
+
+        public void HideHud()
+        {
+            hudDocument.enabled = false;
         }
     }
 }

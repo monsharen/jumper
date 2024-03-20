@@ -1,5 +1,6 @@
 using Controls;
 using Ugs;
+using UI;
 using UnityEngine;
 
 namespace State
@@ -8,19 +9,22 @@ namespace State
     {
         private readonly StateMachine stateMachine;
         private readonly Player player;
+        private readonly Ui ui;
         private readonly EffectManager effectManager;
         
 
-        public JumpingState(Player player, EffectManager effectManager, StateMachine stateMachine)
+        public JumpingState(Player player, Ui ui, EffectManager effectManager, StateMachine stateMachine)
         {
             this.player = player;
+            this.ui = ui;
             this.effectManager = effectManager;
             this.stateMachine = stateMachine;
         }
 
         public void Start()
         {
-
+            player.ConsumeFuel(5f);
+            ui.UpdateFuel();
         }
 
         public void Update()

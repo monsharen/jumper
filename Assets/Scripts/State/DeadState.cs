@@ -24,11 +24,10 @@ namespace State
         }
         public void Start()
         {
+            ui.HideHud();
             effectManager.ShakeCamera();
             var distance = Math.Round(player.GetPosition());
             unityGamingServices.GetLeaderboards().SubmitScore(distance);
-
-            
             
             
             var task = unityGamingServices.GetLeaderboards().RefreshScores();

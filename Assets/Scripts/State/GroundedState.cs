@@ -1,4 +1,5 @@
 using Controls;
+using UI;
 using UnityEngine;
 
 namespace State
@@ -9,10 +10,12 @@ namespace State
         private readonly Player player;
         private readonly StateMachine stateMachine;
         private readonly EffectManager effectManager;
+        private readonly Ui ui;
         
-        public GroundedState(Player player, EffectManager effectManager, StateMachine stateMachine)
+        public GroundedState(Player player, Ui ui, EffectManager effectManager, StateMachine stateMachine)
         {
             this.player = player;
+            this.ui = ui;
             this.effectManager = effectManager;
             this.stateMachine = stateMachine;
         }
@@ -24,7 +27,8 @@ namespace State
 
         public void Update()
         {
-            if (Input.GetButtonDown("Jump"))
+            ui.UpdateFuel();
+            if (player.Fuel >= 5f && Input.GetButtonDown("Jump"))
             {
                 stateMachine.ChangeState(State.Jumping);
             }
