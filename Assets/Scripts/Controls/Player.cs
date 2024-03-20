@@ -1,4 +1,3 @@
-using Ugs;
 using UnityEngine;
 
 namespace Controls
@@ -8,14 +7,19 @@ namespace Controls
         
         private readonly GameObject gameObject;
         private readonly Rigidbody rigidbody;
-        private readonly UnityGamingServices unityGamingServices;
+
+        private const float ForwardSpeed = 30f;
+        private const float JumpForce = 10f;
+        
+        private readonly float fuel;
 
         public Jump Jump { get; internal set; }
 
-        public Player(GameObject gameObject, UnityGamingServices unityGamingServices)
+        public Player(GameObject gameObject, float fuel)
         {
             this.gameObject = gameObject;
-            this.unityGamingServices = unityGamingServices;
+            this.fuel = fuel;
+            
             rigidbody = this.gameObject.GetComponent<Rigidbody>();
         }
         
@@ -36,9 +40,7 @@ namespace Controls
 
         public void ResetJumpState()
         {
-            var forwardSpeed = unityGamingServices.GetRemoteConfig().ForwardSpeed;
-            var jumpForce = unityGamingServices.GetRemoteConfig().JumpForce;
-            Jump = new Jump(this, jumpForce, forwardSpeed);
+            Jump = new Jump(this, JumpForce, ForwardSpeed);
         }
 
         public void Stop()

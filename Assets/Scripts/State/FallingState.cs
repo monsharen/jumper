@@ -50,6 +50,7 @@ namespace State
 
         public void OnCollisionEnter(Collision collision)
         {
+            Debug.Log("collision: " + collision.gameObject.tag);
             if (CollisionUtil.IsCollisionWithWall(collision))
             {
                 stateMachine.ChangeState(State.Dead);

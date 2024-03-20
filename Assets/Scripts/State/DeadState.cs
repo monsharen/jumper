@@ -28,7 +28,6 @@ namespace State
             var distance = Math.Round(player.GetPosition());
             Debug.Log("Player Died at " + distance);
             unityGamingServices.GetLeaderboards().SubmitScore(distance);
-            unityGamingServices.GetAnalytics().SendPlayerDiedEvent(distance);
             
             var task = unityGamingServices.GetLeaderboards().RefreshScores();
             task.ContinueWith(t =>

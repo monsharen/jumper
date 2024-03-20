@@ -6,28 +6,24 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using static State.State;
 
-[RequireComponent(typeof(Rigidbody))]
-public class PlayerController : MonoBehaviour
+public class Game : MonoBehaviour
 {
-
     public UIDocument uiDocument;
     public VisualTreeAsset leaderboardEntry;
-    
-    private float jumpStartTime;
+    public GameObject playerObject;
 
+    private UnityGamingServices unityGamingServices;
     private StateMachine stateMachine;
     async void Start()
     {
         stateMachine = new StateMachine();
-        var unityGamingServices = new UnityGamingServices(
-            new Leaderboards(), new Authentication(), new Analytics(), new RemoteConfig());
-        Debug.Log("Initialising UGS...");
+        unityGamingServices = new UnityGamingServices(new Leaderboards(), new Authentication(), new Analytics(), new RemoteConfig());
         await unityGamingServices.Init();
         
-        var cameraShake = Camera.main.GetComponent<CameraShake>();
-        var effectManager = new EffectManager(cameraShake);
-        var player = new Player(gameObject, unityGamingServices);
+        var player = CreatePlayer();
+        
         var ui = new Ui(unityGamingServices, stateMachine, uiDocument, leaderboardEntry);
+        var effectManager = GetEffectManager();
         stateMachine.Register(Dead, new DeadState(player, ui, effectManager, unityGamingServices, stateMachine));
         stateMachine.Register(Falling, new FallingState( player, unityGamingServices, effectManager, stateMachine));
         stateMachine.Register(Jumping, new JumpingState(player, effectManager, stateMachine));
@@ -49,7 +45,7 @@ public class PlayerController : MonoBehaviour
         stateMachine.FixedUpdate();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
         stateMachine.OnCollisionEnter(collision);
     }
@@ -57,5 +53,16 @@ public class PlayerController : MonoBehaviour
     public void OnCollisionExit(Collision collision)
     {
         stateMachine.OnCollisionExit(collision);
+    }
+    
+    private EffectManager GetEffectManager()
+    {
+        return new EffectManager(Camera.main.GetComponent<CameraShake>());
+    }
+    
+    private Player CreatePlayer()
+    {
+        var fuel = 30f;
+        return new Player(playerObject, fuel);
     }
 }

@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Unity.Services.Core;
+using UnityEngine;
 
 namespace Ugs
 {
@@ -22,7 +23,6 @@ namespace Ugs
         {
             await UnityServices.InitializeAsync();
             await authentication.SignInAnonymously();
-            await remoteConfig.RefreshConfig();
         }
         
         public RemoteConfig GetRemoteConfig()
