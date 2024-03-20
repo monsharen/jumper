@@ -26,8 +26,10 @@ namespace State
         {
             effectManager.ShakeCamera();
             var distance = Math.Round(player.GetPosition());
-            Debug.Log("Player Died at " + distance);
             unityGamingServices.GetLeaderboards().SubmitScore(distance);
+
+            
+            
             
             var task = unityGamingServices.GetLeaderboards().RefreshScores();
             task.ContinueWith(t =>
