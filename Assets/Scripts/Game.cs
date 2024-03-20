@@ -40,10 +40,7 @@ public class Game : MonoBehaviour
     
     public void StartNewGame()
     {
-        var fuel = 30;
-        
-        player.Stop();
-        player.Fuel = fuel;
+        player.Fuel = 30;
         player.SetPosition(0, 2);
     }
 
