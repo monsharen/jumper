@@ -1,3 +1,4 @@
+using Controls;
 using Ugs;
 using UnityEngine;
 
@@ -5,15 +6,13 @@ namespace State
 {
     public class FallingState : IState
     {
-
-        //private readonly float fallingSpeed = -20f;
+        
         private readonly StateMachine stateMachine;
         private readonly UnityGamingServices unityGamingServices;
         private readonly EffectManager effectManager;
         private readonly Player player;
-        
-        private float gravity = 0f;
-        private float maxFallSpeed = 0f;
+
+        private Jump jump;
 
         public FallingState(Player player, UnityGamingServices unityGamingServices, EffectManager effectManager, StateMachine stateMachine)
         {
@@ -25,8 +24,7 @@ namespace State
 
         public void Start()
         {
-            gravity = unityGamingServices.GetRemoteConfig().Gravity;
-            maxFallSpeed = unityGamingServices.GetRemoteConfig().MaxFallSpeed;
+            jump = player.Jump;
         }
 
         public void Update()
@@ -36,11 +34,8 @@ namespace State
 
         public void FixedUpdate()
         {
-            player.MoveForward();
-            
-            var fallSpeed = Mathf.Max(maxFallSpeed, gravity * Time.fixedDeltaTime);
-            
-            player.GetRigidbody().velocity = new Vector3(0, -fallSpeed, 0);
+            jump.MoveForward();
+            jump.FallUpdate();
             
             if (player.GetRigidbody().transform.position.y < -1)
             {
@@ -55,6 +50,7 @@ namespace State
 
         public void OnCollisionEnter(Collision collision)
         {
+            Debug.Log("collision: " + collision.gameObject.tag);
             if (CollisionUtil.IsCollisionWithWall(collision))
             {
                 stateMachine.ChangeState(State.Dead);
