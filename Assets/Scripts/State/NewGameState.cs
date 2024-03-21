@@ -1,4 +1,5 @@
 using Controls;
+using Ugs;
 using UI;
 using UnityEngine;
 
@@ -7,14 +8,14 @@ namespace State
     public class NewGameState : IState
     {
 
+        private readonly UnityGamingServices unityGamingServices;
         private readonly Player player;
-        private readonly Game game;
         private readonly Ui ui;
         private readonly StateMachine stateMachine;
 
-        public NewGameState(Game game, Player player, Ui ui, StateMachine stateMachine)
+        public NewGameState(UnityGamingServices unityGamingServices, Player player, Ui ui, StateMachine stateMachine)
         {
-            this.game = game;
+            this.unityGamingServices = unityGamingServices;
             this.player = player;
             this.ui = ui;
             this.stateMachine = stateMachine;
@@ -22,7 +23,9 @@ namespace State
 
         public void Start()
         {
-            game.StartNewGame();
+            player.Fuel = 30;
+            player.SetPosition(0, 2);
+            
             
             ui.UpdateFuel();
             ui.ShowHud();

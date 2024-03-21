@@ -12,36 +12,27 @@ public class Game : MonoBehaviour
     public UIDocument hudUiDocument;
     public VisualTreeAsset leaderboardEntry;
     public GameObject playerObject;
-
-    private UnityGamingServices unityGamingServices;
+    
     private StateMachine stateMachine;
-    private Player player;
-    private Ui ui;
     async void Start()
     {
         stateMachine = new StateMachine();
-        unityGamingServices = new UnityGamingServices(new Leaderboards(), new Authentication(), new Analytics(), new RemoteConfig());
+        var unityGamingServices = new UnityGamingServices(new Leaderboards(), new Authentication(), new Analytics(), new RemoteConfig());
         await unityGamingServices.Init();
         
-        player = CreatePlayer();
+        var player = CreatePlayer();
         
-        ui = new Ui(unityGamingServices, player, stateMachine, uiDocument, hudUiDocument, leaderboardEntry);
+        var ui = new Ui(unityGamingServices, player, stateMachine, uiDocument, hudUiDocument, leaderboardEntry);
         var effectManager = GetEffectManager();
         stateMachine.Register(Dead, new DeadState(player, ui, effectManager, unityGamingServices, stateMachine));
         stateMachine.Register(Falling, new FallingState(player, unityGamingServices, effectManager, stateMachine));
         stateMachine.Register(Jumping, new JumpingState(player, ui, effectManager, stateMachine));
         stateMachine.Register(Grounded, new GroundedState(player, ui, effectManager, stateMachine));
         stateMachine.Register(Leaderboard, new LeaderboardState(ui, unityGamingServices));
-        stateMachine.Register(NewGame, new NewGameState(this, player, ui, stateMachine));
+        stateMachine.Register(NewGame, new NewGameState(unityGamingServices, player, ui, stateMachine));
         
         await unityGamingServices.GetLeaderboards().RefreshScores();
         stateMachine.ChangeState(Leaderboard);
-    }
-    
-    public void StartNewGame()
-    {
-        player.Fuel = 30;
-        player.SetPosition(0, 2);
     }
 
     void Update()
